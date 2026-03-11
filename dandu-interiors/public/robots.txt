@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://danduinteriors.com/sitemap.xml
