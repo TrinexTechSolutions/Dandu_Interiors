@@ -1,8 +1,45 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaPhone } from "react-icons/fa";
 import AnimatedSection from "../components/animation/AnimatedSection";
 import PageSeo from "../components/seo/PageSeo";
 import { contactInfo, seoKeywords } from "../content/siteContent";
+
+const pulseAnimation = {
+  scale: [1, 1.05, 1],
+  transition: {
+    duration: 2,
+    repeat: Infinity,
+    ease: "easeInOut"
+  }
+};
+
+const slideInFromLeft = {
+  hidden: { opacity: 0, x: -100 },
+  visible: { 
+    opacity: 1, 
+    x: 0,
+    transition: { duration: 0.8, ease: "easeOut" }
+  }
+};
+
+const slideInFromRight = {
+  hidden: { opacity: 0, x: 100 },
+  visible: { 
+    opacity: 1, 
+    x: 0,
+    transition: { duration: 0.8, ease: "easeOut" }
+  }
+};
+
+const floatAnimation = {
+  y: [0, -10, 0],
+  transition: {
+    duration: 3,
+    repeat: Infinity,
+    ease: "easeInOut"
+  }
+};
 
 function ContactPage() {
   const [formData, setFormData] = useState({
@@ -50,24 +87,89 @@ function ContactPage() {
         path="/contact"
       />
 
-      <AnimatedSection className="page-banner">
+      <motion.section 
+        className="page-banner"
+        style={{ 
+          background: 'linear-gradient(135deg, var(--color-beige) 0%, var(--color-cream) 50%, var(--color-gold) 100%)',
+          position: 'relative',
+          overflow: 'hidden'
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        <motion.div
+          style={{
+            position: 'absolute',
+            top: '10%',
+            left: '5%',
+            fontSize: '8rem',
+            opacity: 0.05,
+            color: 'var(--color-brown)'
+          }}
+          animate={floatAnimation}
+        >
+          <FaEnvelope />
+        </motion.div>
+        <motion.div
+          style={{
+            position: 'absolute',
+            bottom: '15%',
+            right: '8%',
+            fontSize: '6rem',
+            opacity: 0.05,
+            color: 'var(--color-brown)'
+          }}
+          animate={{ ...floatAnimation, transition: { ...floatAnimation.transition, delay: 1 } }}
+        >
+          <FaPhone />
+        </motion.div>
         <div className="container">
-          <h1>Contact Us</h1>
-          <p>Reach us to book consultation, request maintenance services, or discuss infrastructure work.</p>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            style={{ textAlign: 'center' }}
+          >
+            <h1>Contact Us</h1>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              Reach us to book consultation, request maintenance services, or discuss infrastructure work.
+            </motion.p>
+          </motion.div>
         </div>
-      </AnimatedSection>
+      </motion.section>
 
       <AnimatedSection className="content-section">
         <div className="container contact-grid">
           {/* Left Column: Contact Information */}
-          <div className="contact-info-column">
+          <motion.div 
+            className="contact-info-column"
+            variants={slideInFromLeft}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+          >
             <h2>Get In</h2>
             <h1>Touch With Us</h1>
             <div className="contact-details">
-              <div className="contact-detail-item">
-                <div className="contact-detail-icon">
+              <motion.div 
+                className="contact-detail-item"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                whileHover={{ x: 10, transition: { duration: 0.3 } }}
+              >
+                <motion.div 
+                  className="contact-detail-icon"
+                  animate={pulseAnimation}
+                >
                   <FaMapMarkerAlt />
-                </div>
+                </motion.div>
                 <div className="contact-detail-text">
                   <h3>Registered Office (Hyderabad)</h3>
                   <p>
@@ -75,47 +177,89 @@ function ContactPage() {
                     {contactInfo.hyderabadAddress.join(", ")}
                   </p>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="contact-detail-item">
-                <div className="contact-detail-icon">
+              <motion.div 
+                className="contact-detail-item"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                whileHover={{ x: 10, transition: { duration: 0.3 } }}
+              >
+                <motion.div 
+                  className="contact-detail-icon"
+                  animate={{ ...pulseAnimation, transition: { ...pulseAnimation.transition, delay: 0.5 } }}
+                >
                   <FaMapMarkerAlt />
-                </div>
+                </motion.div>
                 <div className="contact-detail-text">
                   <h3>Bapatla Address</h3>
                   <p>{contactInfo.bapatlaAddress.join(", ")}</p>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="contact-detail-item">
-                <div className="contact-detail-icon">
+              <motion.div 
+                className="contact-detail-item"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                whileHover={{ x: 10, transition: { duration: 0.3 } }}
+              >
+                <motion.div 
+                  className="contact-detail-icon"
+                  animate={{ ...pulseAnimation, transition: { ...pulseAnimation.transition, delay: 1 } }}
+                >
                   <FaPhone />
-                </div>
+                </motion.div>
                 <div className="contact-detail-text">
                   <h3>Call Us</h3>
                   <p>{contactInfo.phone}</p>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="contact-detail-item">
-                <div className="contact-detail-icon">
+              <motion.div 
+                className="contact-detail-item"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                whileHover={{ x: 10, transition: { duration: 0.3 } }}
+              >
+                <motion.div 
+                  className="contact-detail-icon"
+                  animate={{ ...pulseAnimation, transition: { ...pulseAnimation.transition, delay: 1.5 } }}
+                >
                   <FaEnvelope />
-                </div>
+                </motion.div>
                 <div className="contact-detail-text">
                   <h3>Send Us</h3>
                   <p>{contactInfo.email}</p>
                 </div>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Contact Form */}
-          <div className="contact-form-column">
+          <motion.div 
+            className="contact-form-column"
+            variants={slideInFromRight}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+          >
             <h2>General</h2>
             <h1>Inquiry</h1>
             <form className="contact-form" onSubmit={handleSubmit}>
-              <div className="form-group-row">
-                <input
+              <motion.div 
+                className="form-group-row"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+              >
+                <motion.input
                   type="text"
                   name="name"
                   placeholder="Full Name"
@@ -123,8 +267,9 @@ function ContactPage() {
                   value={formData.name}
                   onChange={handleChange}
                   required
+                  whileFocus={{ scale: 1.02, transition: { duration: 0.2 } }}
                 />
-                <input
+                <motion.input
                   type="email"
                   name="email"
                   placeholder="Email Address"
@@ -132,10 +277,17 @@ function ContactPage() {
                   value={formData.email}
                   onChange={handleChange}
                   required
+                  whileFocus={{ scale: 1.02, transition: { duration: 0.2 } }}
                 />
-              </div>
-              <div className="form-group-row">
-                <input
+              </motion.div>
+              <motion.div 
+                className="form-group-row"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                <motion.input
                   type="tel"
                   name="phone"
                   placeholder="Phone Number"
@@ -143,8 +295,9 @@ function ContactPage() {
                   value={formData.phone}
                   onChange={handleChange}
                   required
+                  whileFocus={{ scale: 1.02, transition: { duration: 0.2 } }}
                 />
-                <input
+                <motion.input
                   type="text"
                   name="subject"
                   placeholder="Subject"
@@ -152,9 +305,10 @@ function ContactPage() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
+                  whileFocus={{ scale: 1.02, transition: { duration: 0.2 } }}
                 />
-              </div>
-              <textarea
+              </motion.div>
+              <motion.textarea
                 name="message"
                 placeholder="Your Message"
                 rows={5}
@@ -162,23 +316,44 @@ function ContactPage() {
                 value={formData.message}
                 onChange={handleChange}
                 required
-              ></textarea>
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                whileFocus={{ scale: 1.02, transition: { duration: 0.2 } }}
+              ></motion.textarea>
 
               {status.submitted && (
-                <div className={`status-message ${status.error ? "error" : "success"}`} style={{ color: status.error ? "red" : "green", fontWeight: 500 }}>
+                <motion.div 
+                  className={`status-message ${status.error ? "error" : "success"}`} 
+                  style={{ color: status.error ? "red" : "green", fontWeight: 500 }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4 }}
+                >
                   {status.message}
-                </div>
+                </motion.div>
               )}
 
-              <button type="submit" className="btn-submit" disabled={status.submitting}>
+              <motion.button 
+                type="submit" 
+                className="btn-submit" 
+                disabled={status.submitting}
+                whileHover={{ scale: 1.05, boxShadow: '0 15px 30px rgba(139, 107, 76, 0.3)' }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+              >
                 {status.submitting ? "Sending..." : (
                   <>
                     Send Message <FaPaperPlane />
                   </>
                 )}
-              </button>
+              </motion.button>
             </form>
-          </div>
+          </motion.div>
         </div>
       </AnimatedSection>
     </>
