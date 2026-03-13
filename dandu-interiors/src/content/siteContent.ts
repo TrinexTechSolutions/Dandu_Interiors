@@ -2,9 +2,10 @@ export const navItems = [
   { label: "Home", path: "/" },
   { label: "Interior Design", path: "/interior-design" },
   { label: "Maintenance Services", path: "/maintenance-services" },
+  { label: "Projects", path: "/projects" },
   { label: "Portfolio", path: "/portfolio" },
+  { label: "Design Theme", path: "/design-theme" },
   { label: "About Us", path: "/about-us" },
-  { label: "Testimonials", path: "/testimonials" },
   { label: "Contact", path: "/contact" },
 ];
 

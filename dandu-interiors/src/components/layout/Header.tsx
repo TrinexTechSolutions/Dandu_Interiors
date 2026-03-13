@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { navItems } from "../../content/siteContent";
 import logo from "../../assets/logo_and_bg/Dandu_logo_1.svg";
+import { FaInstagram, FaWhatsapp, FaPinterestP } from "react-icons/fa";
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,17 +22,29 @@ function Header() {
     setIsMenuOpen(false);
   }, [location]);
 
-  const leftNavItems = navItems.filter((item) =>
-    ["/", "/interior-design", "/maintenance-services"].includes(item.path),
-  );
-  const rightNavItems = navItems.filter((item) =>
-    ["/portfolio", "/about-us", "/testimonials", "/contact"].includes(item.path),
-  );
 
   return (
     <>
       <header className={`site-header ${isScrolled ? "scrolled" : ""}`}>
-        <div className="container nav-wrap split-nav-wrap">
+        <div className="social-links-top">
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <FaInstagram />
+          </a>
+          <a href="https://wa.me/919866166612" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <FaWhatsapp />
+          </a>
+          <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+            <FaPinterestP />
+          </a>
+        </div>
+        <div className="container nav-wrap-vertical">
+          {/* Row 1: Brand Logo */}
+          <div className="brand-row">
+            <Link to="/" className="brand-mark centered-brand">
+              <img src={logo} alt="Dandu Interiors" className="brand-logo" />
+            </Link>
+          </div>
+
           <button
             className="mobile-toggle"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -42,27 +55,9 @@ function Header() {
             <span style={{ transform: isMenuOpen ? "rotate(-45deg) translate(5px, -5px)" : "none" }}></span>
           </button>
 
-          <nav aria-label="Primary navigation left" className="nav-menu nav-menu-left">
-            {leftNavItems.map((item) => (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                className={({ isActive }) =>
-                  isActive ? "nav-link active-link" : "nav-link"
-                }
-                end={item.path === "/"}
-              >
-                {item.label}
-              </NavLink>
-            ))}
-          </nav>
-
-          <Link to="/" className="brand-mark centered-brand">
-            <img src={logo} alt="Dandu Interiors" className="brand-logo" />
-          </Link>
-
-          <nav aria-label="Primary navigation right" className="nav-menu nav-menu-right">
-            {rightNavItems.map((item) => (
+          {/* Row 2: Navigation Navigation */}
+          <nav aria-label="Primary navigation" className="nav-menu nav-row">
+            {navItems.map((item) => (
               <NavLink
                 key={item.path}
                 to={item.path}

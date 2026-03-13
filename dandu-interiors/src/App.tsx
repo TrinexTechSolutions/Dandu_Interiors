@@ -4,8 +4,9 @@ import HomePage from "./pages/HomePage";
 import InteriorDesignPage from "./pages/InteriorDesignPage";
 import MaintenanceServicesPage from "./pages/MaintenanceServicesPage";
 import PortfolioPage from "./pages/PortfolioPage";
+import ProjectsPage from "./pages/ProjectsPage";
+import DesignThemePage from "./pages/DesignThemePage";
 import AboutPage from "./pages/AboutPage";
-import TestimonialsPage from "./pages/TestimonialsPage";
 import ContactPage from "./pages/ContactPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ServiceDetailsPage from "./pages/ServiceDetailsPage";
@@ -18,9 +19,10 @@ function App() {
         <Route path="interior-design" element={<InteriorDesignPage />} />
         <Route path="interior-design/:serviceId" element={<ServiceDetailsPage />} />
         <Route path="maintenance-services" element={<MaintenanceServicesPage />} />
+        <Route path="projects" element={<ProjectsPage />} />
         <Route path="portfolio" element={<PortfolioPage />} />
+        <Route path="design-theme" element={<DesignThemePage />} />
         <Route path="about-us" element={<AboutPage />} />
-        <Route path="testimonials" element={<TestimonialsPage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="home" element={<Navigate to="/" replace />} />
         <Route path="*" element={<NotFoundPage />} />

@@ -1,227 +1,275 @@
-import { motion } from "framer-motion";
-import { FaHome, FaBuilding, FaBriefcase, FaHandshake } from "react-icons/fa";
-import AnimatedSection from "../components/animation/AnimatedSection";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { FaHome, FaBuilding, FaBriefcase, FaHandshake, FaArrowRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import PageSeo from "../components/seo/PageSeo";
 import { seoKeywords } from "../content/siteContent";
 
+// Import project images
+import HeroLuxury from "../assets/images/hero_luxury.png";
+import WardrobeDesign from "../assets/images/wardrobe_design.png";
+import ModularKitchen from "../assets/images/modular_kitchen.png";
+import CivilWork from "../assets/images/civil_maintenance.png";
+import PaintingWork from "../assets/images/painting_maintenance.png";
+import CarpentryWork from "../assets/images/carpentry_maintenance.png";
+
 const projects = [
   {
-    title: "Residential Interior Project",
-    description: "Complete home interior setup including modular kitchen, wardrobes, and false ceiling work.",
-    icon: <FaHome />,
-    category: "Residential"
+    title: "Luxury Villa Interior",
+    description: "A comprehensive design and execution project for a high-end villa, featuring bespoke furniture and premium finishes.",
+    category: "Residential",
+    image: HeroLuxury,
+    icon: <FaHome />
   },
   {
-    title: "Apartment Renovation",
-    description: "Flooring upgrade, repainting, and smart storage redesign for apartment living.",
-    icon: <FaBuilding />,
-    category: "Renovation"
+    title: "Modern Wardrobe Solutions",
+    description: "Custom-designed modular wardrobes with ergonomic layouts and premium hardware.",
+    category: "Interior Design",
+    image: WardrobeDesign,
+    icon: <FaHome />
   },
   {
-    title: "Office Space Transformation",
-    description: "Functional office layout with architectural planning and interior finishing.",
-    icon: <FaBriefcase />,
-    category: "Commercial"
+    title: "Italian Style Kitchen",
+    description: "A state-of-the-art modular kitchen featuring Italian marble countertops and soft-close cabinetry.",
+    category: "Residential",
+    image: ModularKitchen,
+    icon: <FaHome />
   },
   {
-    title: "Maintenance AMC Works",
-    description: "Civil, plumbing, and electrical maintenance support under annual contracts.",
-    icon: <FaHandshake />,
-    category: "Maintenance"
+    title: "Corporate Hub Office",
+    description: "An innovative workspace design focused on productivity, collaboration, and modern aesthetics.",
+    category: "Commercial",
+    image: "/assets/executive_office_interior.png",
+    icon: <FaBriefcase />
+  },
+  {
+    title: "Full Home Renovation",
+    description: "Transforming an aging apartment into a contemporary masterpiece through civil and architectural upgrades.",
+    category: "Renovation",
+    image: CivilWork,
+    icon: <FaBuilding />
+  },
+  {
+    title: "Annual Maintenance",
+    description: "Professional AMC services ensuring the longevity and upkeep of civil and electrical systems.",
+    category: "Maintenance",
+    image: PaintingWork,
+    icon: <FaHandshake />
+  },
+  {
+    title: "Bespoke Carpentry",
+    description: "Handcrafted wooden fixtures, partitions, and decorative elements for luxury interiors.",
+    category: "Interior Design",
+    image: CarpentryWork,
+    icon: <FaHome />
   },
 ];
 
-const flipIn = {
-  hidden: { rotateY: 90, opacity: 0 },
-  visible: { 
-    rotateY: 0, 
-    opacity: 1
+const fadeInUp = {
+  hidden: { opacity: 0, y: 60 },
+  visible: {
+    opacity: 1,
+    y: 0
   }
 };
 
-const expandWidth = {
-  hidden: { width: 0, opacity: 0 },
-  visible: { 
-    width: "100%", 
-    opacity: 1
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15
+    }
   }
 };
 
 function PortfolioPage() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  const headerY = useTransform(scrollYProgress, [0, 0.2], [0, -50]);
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+
   return (
     <>
       <PageSeo
-        title="Portfolio"
-        description="Explore our interior design, renovation, and maintenance works in Hyderabad and Bapatla."
+        title="Portfolio | Dandu Interiors"
+        description="Explore our gallery of luxury residential interiors, commercial spaces, and professional maintenance work in Hyderabad and Bapatla."
         keywords={seoKeywords}
         path="/portfolio"
       />
 
-      <motion.section 
-        className="page-banner"
+      <section 
+        className="hero-section"
         style={{ 
-          background: 'linear-gradient(to right, var(--color-cream) 0%, var(--color-beige) 50%, var(--color-gold) 100%)',
+          background: 'var(--color-cream)',
+          minHeight: '80vh',
+          display: 'flex',
+          alignItems: 'center',
+          overflow: 'hidden',
           position: 'relative'
         }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
       >
+        <div className="container" style={{ position: 'relative', zIndex: 10 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '4rem', alignItems: 'center' }}>
+            <motion.div
+              style={{ y: headerY, opacity: headerOpacity }}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="eyebrow">Our Masterpieces</div>
+              <h1 style={{ fontSize: 'clamp(3rem, 7vw, 6rem)', lineHeight: '1.1', fontWeight: 800 }}>
+                Selected <br />
+                <span className="text-gradient">Portfolio.</span>
+              </h1>
+              <p className="lead-copy" style={{ marginTop: '1.5rem', maxWidth: '500px' }}>
+                A showcase of our dedication to craftsmanship, from luxury residence curation to large-scale infrastructure maintenance.
+              </p>
+            </motion.div>
+
+            <motion.div 
+              className="composition-grid"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <div className="comp-item-1 organic-blob">
+                <img src={HeroLuxury} alt="Hero Luxury" className="comp-img" />
+              </div>
+              <div className="comp-item-2 organic-blob-2">
+                <img src={WardrobeDesign} alt="Wardrobe Design" className="comp-img" />
+              </div>
+              <div className="comp-item-3 glass-morphism" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', textAlign: 'center' }}>
+                <div>
+                  <div style={{ fontSize: '2.5rem', fontWeight: 700, color: 'var(--color-brown)' }}>50+</div>
+                  <div style={{ fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Completed Projects</div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+        
+        {/* Decorative background */}
+        <div style={{
+          position: 'absolute',
+          top: '-10%',
+          right: '-10%',
+          width: '50%',
+          aspectRatio: '1',
+          background: 'var(--color-beige)',
+          borderRadius: '50%',
+          filter: 'blur(120px)',
+          opacity: 0.2,
+          zIndex: 1
+        }} />
+      </section>
+
+      <section className="perspective-container" style={{ padding: '10rem 0' }}>
         <div className="container">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="mosaic-grid"
+            style={{ height: 'auto', gridTemplateRows: 'auto' }}
           >
-            <h1>Portfolio</h1>
-            <motion.div
-              variants={expandWidth}
-              initial="hidden"
-              animate="visible"
-              style={{
-                height: '4px',
-                background: 'var(--color-brown)',
-                marginTop: '1rem',
-                marginBottom: '1rem',
-                borderRadius: '2px'
-              }}
-            />
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-            >
-              Selected interior design and maintenance projects delivered by our team.
-            </motion.p>
-          </motion.div>
-        </div>
-      </motion.section>
-
-      <AnimatedSection className="content-section">
-        <div className="container">
-          <div className="cards-grid two-column" style={{ gap: '3rem' }}>
             {projects.map((project, index) => (
-              <motion.article 
+              <motion.article
                 key={project.title}
-                className="service-card"
-                variants={flipIn}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ delay: index * 0.2 }}
-                whileHover={{ 
-                  scale: 1.02,
-                  boxShadow: '0 25px 50px rgba(139, 107, 76, 0.25)',
-                  transition: { duration: 0.3 }
-                }}
-                style={{
-                  position: 'relative',
+                variants={fadeInUp}
+                transition={{ duration: 0.6 }}
+                className={`mosaic-tile ${index === 0 ? 'tile-large' : index === 1 ? 'tile-tall' : index === 4 ? 'tile-wide' : ''}`}
+                style={{ 
+                  minHeight: index === 0 ? '600px' : '400px',
+                  background: 'var(--color-charcoal)',
+                  marginBottom: '1.5rem',
                   overflow: 'hidden',
-                  padding: '2.5rem',
-                  background: index % 2 === 0 ? '#fff' : 'var(--color-cream)'
+                  position: 'relative'
                 }}
+                whileHover={{ y: -10 }}
               >
-                <motion.div
-                  style={{
-                    position: 'absolute',
-                    top: '1.5rem',
-                    right: '1.5rem',
-                    fontSize: '4rem',
-                    opacity: 0.08,
-                    color: 'var(--color-brown)'
-                  }}
-                  animate={{ 
-                    scale: [1, 1.1, 1],
-                    rotate: [0, 5, 0]
-                  }}
-                  transition={{ 
-                    duration: 4, 
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                >
-                  {project.icon}
-                </motion.div>
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover', 
+                    opacity: 0.5,
+                    transition: 'opacity 0.5s ease'
+                  }} 
+                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
+                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.5")}
+                />
                 
-                <motion.div
-                  style={{
+                <div style={{
+                  position: 'absolute',
+                  inset: 0,
+                  padding: '2.5rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-end',
+                  background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%)',
+                  pointerEvents: 'none'
+                }}>
+                  <div style={{
                     display: 'inline-block',
                     padding: '0.4rem 1rem',
-                    background: 'var(--color-brown)',
-                    color: '#fff',
+                    background: 'var(--color-gold)',
+                    color: 'var(--color-charcoal)',
                     borderRadius: '20px',
-                    fontSize: '0.85rem',
-                    fontWeight: '600',
-                    marginBottom: '1.5rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  {project.category}
-                </motion.div>
-
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1.5rem' }}>
-                  <motion.div
-                    style={{
-                      fontSize: '3rem',
-                      color: 'var(--color-brown)',
-                      flexShrink: 0
-                    }}
-                    whileHover={{ 
-                      rotate: 360,
-                      scale: 1.2
-                    }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    {project.icon}
-                  </motion.div>
-                  
-                  <div>
-                    <h2 style={{ marginBottom: '1rem', fontSize: '1.75rem' }}>{project.title}</h2>
-                    <p style={{ color: 'var(--color-gray)', lineHeight: '1.7', margin: 0 }}>
-                      {project.description}
-                    </p>
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                    width: 'fit-content',
+                    marginBottom: '1rem',
+                    textTransform: 'uppercase'
+                  }}>
+                    {project.category}
                   </div>
+                  <h3 style={{ color: '#fff', fontSize: index === 0 ? '2.5rem' : '1.8rem', marginBottom: '0.5rem' }}>{project.title}</h3>
+                  <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.95rem', margin: 0, maxWidth: '400px' }}>
+                    {project.description}
+                  </p>
                 </div>
               </motion.article>
             ))}
-          </div>
-        </div>
-      </AnimatedSection>
-
-      <motion.section 
-        className="content-section muted-bg"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="container narrow" style={{ textAlign: 'center' }}>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
-            <h2>Ready to Start Your Project?</h2>
-            <p style={{ fontSize: '1.1rem', lineHeight: '1.8', color: 'var(--color-gray)', marginBottom: '2rem' }}>
-              Let's bring your vision to life with our expertise in interior design and maintenance services.
-            </p>
-            <motion.a
-              href="/contact"
-              className="btn-primary"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              style={{ display: 'inline-block' }}
-            >
-              Get in Touch
-            </motion.a>
           </motion.div>
         </div>
-      </motion.section>
+      </section>
+
+      <section className="content-section" style={{ padding: '8rem 0', background: 'var(--color-charcoal)', position: 'relative', overflow: 'hidden' }}>
+        <div className="geometric-overlay" />
+        <div className="container narrow" style={{ position: 'relative', zIndex: 10, textAlign: 'center' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 style={{ color: '#fff', fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '2.5rem' }}>
+              Want to see <span className="text-gradient">more?</span>
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.2rem', lineHeight: '1.8', marginBottom: '3rem' }}>
+              We have a vast library of completed projects across Hyderabad and Bapatla. 
+              Schedule a consultation to see physical samples and detailed project walkthroughs.
+            </p>
+            <div className="button-row" style={{ justifyContent: 'center' }}>
+              <Link to="/contact" className="btn-primary" style={{ padding: '1.2rem 3rem' }}>
+                Start Your Project Today <FaArrowRight style={{ marginLeft: '0.8rem' }} />
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </>
   );
 }
 
 export default PortfolioPage;
+
