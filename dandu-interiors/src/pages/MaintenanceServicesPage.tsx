@@ -1,56 +1,41 @@
 import { motion } from "framer-motion";
-import { FaHammer, FaWrench, FaBolt, FaTools, FaPaintRoller, FaRoad, FaCheckDouble } from "react-icons/fa";
+import { FaHammer, FaTools, FaPaintRoller, FaCheckDouble } from "react-icons/fa";
 import AnimatedSection from "../components/animation/AnimatedSection";
 import PageSeo from "../components/seo/PageSeo";
 import { globalMetaDescription, seoKeywords } from "../content/siteContent";
 
 const maintenanceBlocks = [
   {
-    title: "Civil Maintenance",
+    title: "Civil Maintenance Works",
     icon: <FaHammer />,
     color: "#8b6b4c",
     items: [
-      "Crack Filling",
-      "Tile Replacement",
-      "Bathroom Leakage Repair",
-      "Terrace Waterproofing",
+      "Floor tiles replacement",
+      "Tiles Grouting works",
+      "Granite and Quartz laying works",
+      "Water Proofing works",
     ],
   },
   {
-    title: "Plumbing Maintenance",
-    icon: <FaWrench />,
+    title: "Painting & Polishing Works",
+    icon: <FaPaintRoller />,
     color: "#6d6d6d",
     items: [
-      "Tap & Pipe Repairs",
-      "Drainage Block Clearing",
-      "Water Tank Cleaning",
+      "Repainting walls",
+      "Exterior painting",
+      "Wood polishing (Melamine Finish)",
+      "Enamel painting for Window grills",
     ],
   },
   {
-    title: "Electrical & Carpentry",
-    icon: <FaBolt />,
+    title: "Carpentry Maintenance",
+    icon: <FaTools />,
     color: "#c5a880",
     items: [
-      "Switch & Socket Repairs",
-      "Fan & MCB Checks",
-      "Door & Lock Repairs",
-    ],
-  },
-  {
-    title: "Painting & Polishing",
-    icon: <FaPaintRoller />,
-    color: "#8b6b4c",
-    items: ["Wall Repainting", "Wood Polishing", "Exterior Painting"],
-  },
-  {
-    title: "Infrastructure Works",
-    icon: <FaRoad />,
-    color: "#6d6d6d",
-    items: [
-      "Pothole Closing",
-      "Road Marking",
-      "Speedbreaker Installation",
-      "Kerb Painting",
+      "Door’s alignment",
+      "Locks replacement",
+      "Hinge & Drawer channel replacement",
+      "Wardrobe & Kitchen Cabinet repair/Replacement",
     ],
   },
 ];
@@ -121,7 +106,7 @@ function MaintenanceServicesPage() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h1>Home Maintenance Services in Hyderabad and Bapatla</h1>
+            <h1>Building Maintenance & Repair Works</h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
