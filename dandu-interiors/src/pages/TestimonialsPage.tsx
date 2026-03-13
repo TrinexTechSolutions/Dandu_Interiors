@@ -35,9 +35,9 @@ function TestimonialsPage() {
         path="/testimonials"
       />
 
-      <motion.section 
+      <motion.section
         className="page-banner"
-        style={{ 
+        style={{
           background: 'radial-gradient(circle at top right, var(--color-gold) 0%, var(--color-beige) 40%, var(--color-cream) 100%)',
           position: 'relative',
           overflow: 'hidden'
@@ -55,12 +55,12 @@ function TestimonialsPage() {
             opacity: 0.04,
             color: 'var(--color-brown)'
           }}
-          animate={{ 
+          animate={{
             rotate: [0, 10, 0],
             scale: [1, 1.1, 1]
           }}
-          transition={{ 
-            duration: 5, 
+          transition={{
+            duration: 5,
             repeat: Infinity,
             ease: "easeInOut"
           }}
@@ -73,7 +73,7 @@ function TestimonialsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <motion.h1 
+            <motion.h1
               style={{ fontSize: "3rem", marginBottom: "15px", fontWeight: "700", color: "#2c3e50" }}
               initial={{ letterSpacing: '0.1em' }}
               animate={{ letterSpacing: '0.02em' }}
@@ -81,15 +81,15 @@ function TestimonialsPage() {
             >
               Client Stories
             </motion.h1>
-            <motion.p 
-              style={{ fontSize: "1.2rem", color: "#555", maxWidth: "600px", margin: "0 auto" }}
+            <motion.p
+              style={{ fontSize: "1.2rem", color: "#555", maxWidth: "800px", margin: "0 auto" }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
             >
               We value our relationships. Here is what our clients have to say about working with us.
             </motion.p>
-            <motion.div 
+            <motion.div
               style={{ width: "60px", height: "4px", background: "#e67e22", margin: "25px auto 0", borderRadius: "2px" }}
               initial={{ width: 0 }}
               animate={{ width: "60px" }}
@@ -100,7 +100,7 @@ function TestimonialsPage() {
       </motion.section>
 
       <AnimatedSection className="content-section">
-        <div className="container" style={{ maxWidth: "900px", margin: "0 auto", background: "#f4f6f8", padding: "60px 20px" }}>
+        <div className="container" style={{ maxWidth: "1400px", margin: "0 auto", background: "#f4f6f8", padding: "60px 20px" }}>
           {testimonials.map((item, index) => (
             <motion.div
               key={item.name}
@@ -108,7 +108,7 @@ function TestimonialsPage() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
-              whileHover={{ 
+              whileHover={{
                 y: -5,
                 boxShadow: "0 20px 40px rgba(139, 107, 76, 0.15)",
                 transition: { duration: 0.3 }
@@ -123,21 +123,21 @@ function TestimonialsPage() {
                 boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
               }}
             >
-              <motion.div 
-                style={{ 
-                  position: "absolute", 
-                  top: "20px", 
+              <motion.div
+                style={{
+                  position: "absolute",
+                  top: "20px",
                   right: "30px",
                   color: index % 3 === 0 ? '#8b6b4c' : index % 3 === 1 ? '#c5a880' : '#6d6d6d',
                   fontSize: '3rem',
                   opacity: 0.1
                 }}
-                animate={{ 
+                animate={{
                   scale: [1, 1.2, 1],
                   rotate: [0, 5, 0]
                 }}
-                transition={{ 
-                  duration: 3, 
+                transition={{
+                  duration: 3,
                   repeat: Infinity,
                   ease: "easeInOut",
                   delay: index * 0.5
@@ -146,7 +146,7 @@ function TestimonialsPage() {
                 <FaQuoteLeft />
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem' }}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -177,10 +177,10 @@ function TestimonialsPage() {
                 "{item.quote}"
               </p>
 
-              <motion.div 
-                style={{ 
-                  display: "flex", 
-                  alignItems: "center", 
+              <motion.div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
                   gap: "15px",
                   paddingTop: '20px',
                   borderTop: '1px solid rgba(109, 109, 109, 0.1)'
@@ -190,7 +190,7 @@ function TestimonialsPage() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
               >
-                <motion.div 
+                <motion.div
                   style={{
                     width: "50px",
                     height: "50px",
@@ -208,7 +208,7 @@ function TestimonialsPage() {
                 >
                   {item.name.charAt(0)}
                 </motion.div>
-                
+
                 <div>
                   <h4 style={{
                     margin: 0,
@@ -233,7 +233,7 @@ function TestimonialsPage() {
         </div>
       </AnimatedSection>
 
-      <motion.section 
+      <motion.section
         className="content-section"
         style={{ background: 'var(--color-cream)' }}
         initial={{ opacity: 0 }}

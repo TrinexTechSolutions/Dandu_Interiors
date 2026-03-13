@@ -34,8 +34,8 @@ const iconVariants = {
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 60 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0
   }
 };
@@ -52,8 +52,8 @@ const staggerContainer = {
 
 const scaleIn = {
   hidden: { scale: 0.8, opacity: 0 },
-  visible: { 
-    scale: 1, 
+  visible: {
+    scale: 1,
     opacity: 1
   }
 };
@@ -83,7 +83,7 @@ function HomePage() {
         path="/"
       />
 
-      <motion.section 
+      <motion.section
         className="hero-section"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -97,7 +97,7 @@ function HomePage() {
           >
             <h1>Interior Design & Home Maintenance Services in Hyderabad and Bapatla</h1>
             <p className="lead-copy">{heroDescription}</p>
-            <motion.div 
+            <motion.div
               className="button-row"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -111,7 +111,7 @@ function HomePage() {
       </motion.section>
 
       <AnimatedSection className="content-section">
-        <motion.div 
+        <motion.div
           className="container narrow"
           variants={fadeInUp}
           initial="hidden"
@@ -139,12 +139,11 @@ function HomePage() {
           >
             Our Services
           </motion.h2>
-          
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
-            gap: '0',
-            maxWidth: '1000px',
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: '1.5rem',
             margin: '0 auto'
           }}>
             {/* Interior Design Services */}
@@ -178,12 +177,12 @@ function HomePage() {
               >
                 🏠
               </motion.div>
-              
+
               <div style={{ position: 'relative', zIndex: 1 }}>
-                <motion.h3 
-                  style={{ 
-                    color: '#fff', 
-                    fontSize: '2rem', 
+                <motion.h3
+                  style={{
+                    color: '#fff',
+                    fontSize: '2rem',
                     marginBottom: '1.5rem',
                     fontFamily: 'var(--font-heading)'
                   }}
@@ -191,15 +190,15 @@ function HomePage() {
                 >
                   Interior Design Services
                 </motion.h3>
-                
-                <ul style={{ 
-                  listStyle: 'none', 
-                  padding: 0, 
+
+                <ul style={{
+                  listStyle: 'none',
+                  padding: 0,
                   margin: 0,
                   color: '#f5f2ed'
                 }}>
                   {['Modular Kitchens', 'Wardrobes', 'False Ceiling', 'Flooring Works', 'Interior Painting'].map((item, index) => (
-                    <motion.li 
+                    <motion.li
                       key={item}
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
@@ -214,9 +213,9 @@ function HomePage() {
                         fontSize: '1.05rem'
                       }}
                     >
-                      <span style={{ 
-                        width: '8px', 
-                        height: '8px', 
+                      <span style={{
+                        width: '8px',
+                        height: '8px',
                         background: '#c5a880',
                         borderRadius: '50%',
                         display: 'inline-block'
@@ -226,7 +225,7 @@ function HomePage() {
                   ))}
                 </ul>
               </div>
-              
+
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 style={{
@@ -277,12 +276,12 @@ function HomePage() {
               >
                 🔧
               </motion.div>
-              
+
               <div style={{ position: 'relative', zIndex: 1 }}>
-                <motion.h3 
-                  style={{ 
-                    color: '#fff', 
-                    fontSize: '2rem', 
+                <motion.h3
+                  style={{
+                    color: '#fff',
+                    fontSize: '2rem',
                     marginBottom: '1.5rem',
                     fontFamily: 'var(--font-heading)'
                   }}
@@ -290,15 +289,15 @@ function HomePage() {
                 >
                   Maintenance Services
                 </motion.h3>
-                
-                <ul style={{ 
-                  listStyle: 'none', 
-                  padding: 0, 
+
+                <ul style={{
+                  listStyle: 'none',
+                  padding: 0,
                   margin: 0,
                   color: '#2f2f2f'
                 }}>
                   {['Civil Maintenance', 'Plumbing Repairs', 'Electrical Works', 'Carpentry', 'Painting'].map((item, index) => (
-                    <motion.li 
+                    <motion.li
                       key={item}
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
@@ -314,9 +313,9 @@ function HomePage() {
                         fontWeight: '500'
                       }}
                     >
-                      <span style={{ 
-                        width: '8px', 
-                        height: '8px', 
+                      <span style={{
+                        width: '8px',
+                        height: '8px',
                         background: '#2f2f2f',
                         borderRadius: '50%',
                         display: 'inline-block'
@@ -326,7 +325,7 @@ function HomePage() {
                   ))}
                 </ul>
               </div>
-              
+
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 style={{
@@ -383,7 +382,7 @@ function HomePage() {
           >
             Why Choose Us
           </motion.h2>
-          <motion.div 
+          <motion.div
             className="cards-grid four-column"
             variants={staggerContainer}
             initial="hidden"
@@ -391,7 +390,7 @@ function HomePage() {
             viewport={{ once: true, amount: 0.2 }}
           >
             {benefits.map((benefit) => (
-              <motion.article 
+              <motion.article
                 key={benefit}
                 className="service-card"
                 variants={scaleIn}

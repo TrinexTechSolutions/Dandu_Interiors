@@ -4,12 +4,20 @@ import Header from "./Header";
 import Footer from "./Footer";
 import FloatingActions from "./FloatingActions";
 import ScrollToTop from "../../utils/ScrollToTop";
+import ClickSpark from "../animation/ClickSpark";
 
 function Layout() {
   const location = useLocation();
 
   return (
     <>
+      <ClickSpark
+        sparkColor='#D4AF37'
+        sparkSize={15}
+        sparkRadius={20}
+        sparkCount={10}
+        duration={400}
+      />
       <ScrollToTop />
       <Header />
       <main className="page-shell">

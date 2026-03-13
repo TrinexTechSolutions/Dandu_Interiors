@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { navItems } from "../../content/siteContent";
+import logo from "../../assets/logo_and_bg/Dandu_logo_1.svg";
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,6 +32,16 @@ function Header() {
     <>
       <header className={`site-header ${isScrolled ? "scrolled" : ""}`}>
         <div className="container nav-wrap split-nav-wrap">
+          <button
+            className="mobile-toggle"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle Navigation"
+          >
+            <span style={{ transform: isMenuOpen ? "rotate(45deg) translate(5px, 5px)" : "none" }}></span>
+            <span style={{ opacity: isMenuOpen ? 0 : 1 }}></span>
+            <span style={{ transform: isMenuOpen ? "rotate(-45deg) translate(5px, -5px)" : "none" }}></span>
+          </button>
+
           <nav aria-label="Primary navigation left" className="nav-menu nav-menu-left">
             {leftNavItems.map((item) => (
               <NavLink
@@ -47,7 +58,7 @@ function Header() {
           </nav>
 
           <Link to="/" className="brand-mark centered-brand">
-            <span className="brand-name">DANDU INTERIORS AND DEVELOPERS</span>
+            <img src={logo} alt="Dandu Interiors" className="brand-logo" />
           </Link>
 
           <nav aria-label="Primary navigation right" className="nav-menu nav-menu-right">
@@ -64,16 +75,6 @@ function Header() {
               </NavLink>
             ))}
           </nav>
-
-          <button
-            className="mobile-toggle"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle Navigation"
-          >
-            <span style={{ transform: isMenuOpen ? "rotate(45deg) translate(5px, 5px)" : "none" }}></span>
-            <span style={{ opacity: isMenuOpen ? 0 : 1 }}></span>
-            <span style={{ transform: isMenuOpen ? "rotate(-45deg) translate(5px, -5px)" : "none" }}></span>
-          </button>
         </div>
       </header>
 

@@ -1,13 +1,8 @@
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import AnimatedSection from "../components/animation/AnimatedSection";
-import ParallaxBackground from "../components/animation/ParallaxBackground";
 import PageSeo from "../components/seo/PageSeo";
 import { seoKeywords, serviceLocations } from "../content/siteContent";
-
-// Importing generated images
-import HeroBg from "/C:/Users/syamp/.gemini/antigravity/brain/026a9792-c70b-41a9-945c-180cf313668d/about_hero_bg_premium_interiors_1773248032134.png";
-import BannerImg from "/C:/Users/syamp/.gemini/antigravity/brain/026a9792-c70b-41a9-945c-180cf313668d/about_banner_success_infrastructure_1773248051018.png";
 
 function AboutPage() {
   const [ref, inView] = useInView({
@@ -15,7 +10,7 @@ function AboutPage() {
     threshold: 0.1,
   });
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -26,7 +21,7 @@ function AboutPage() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { y: 40, opacity: 0 },
     visible: {
       y: 0,
@@ -59,7 +54,7 @@ function AboutPage() {
   ];
 
   return (
-    <div className="bg-white min-h-screen overflow-x-hidden">
+    <div className="bg-white min-h-screen">
       <PageSeo
         title="About Us"
         description="Learn about DANDU INTERIORS AND DEVELOPERS and our interior, maintenance, and infrastructure service approach."
@@ -69,7 +64,6 @@ function AboutPage() {
 
       {/* Hero Section */}
       <AnimatedSection className="hero-section relative min-h-[65vh] flex items-center justify-center bg-beige">
-        <ParallaxBackground src={HeroBg} overlayOpacity={0.1} />
         <div className="container mx-auto px-4 lg:px-8 relative z-10 text-center lg:text-left py-24">
           <motion.div
             className="max-w-3xl"
@@ -187,8 +181,7 @@ function AboutPage() {
 
       {/* Mission & Vision Section */}
       <section className="relative">
-        <div className="relative h-[45vh] flex items-center justify-center">
-          <ParallaxBackground src={BannerImg} overlayOpacity={0.6} />
+        <div className="relative h-[45vh] flex items-center justify-center bg-charcoal">
           <motion.div
             className="relative text-center text-white px-4 z-10"
             initial={{ opacity: 0, y: 30 }}
