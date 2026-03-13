@@ -1,53 +1,16 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaPhone } from "react-icons/fa";
-import AnimatedSection from "../components/animation/AnimatedSection";
+import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 import PageSeo from "../components/seo/PageSeo";
 import { contactInfo, seoKeywords } from "../content/siteContent";
 
-const pulseAnimation = {
-  scale: [1, 1.05, 1],
-  transition: {
-    duration: 2,
-    repeat: Infinity,
-    ease: "easeInOut"
-  }
-};
-
-const slideInFromLeft = {
-  hidden: { opacity: 0, x: -100 },
-  visible: { 
-    opacity: 1, 
-    x: 0,
-    transition: { duration: 0.8, ease: "easeOut" }
-  }
-};
-
-const slideInFromRight = {
-  hidden: { opacity: 0, x: 100 },
-  visible: { 
-    opacity: 1, 
-    x: 0,
-    transition: { duration: 0.8, ease: "easeOut" }
-  }
-};
-
-const floatAnimation = {
-  y: [0, -10, 0],
-  transition: {
-    duration: 3,
-    repeat: Infinity,
-    ease: "easeInOut"
-  }
-};
-
-function ContactPage() {
+export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     phone: "",
-    subject: "",
-    message: "",
+    propertyLocation: "",
+    propertyType: "",
+    requirement: "",
   });
 
   const [status, setStatus] = useState({
@@ -57,7 +20,7 @@ function ContactPage() {
     message: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -74,7 +37,13 @@ function ContactPage() {
         error: false,
         message: "Thank you! Your message has been sent successfully.",
       });
-      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+      setFormData({
+        name: "",
+        phone: "",
+        propertyLocation: "",
+        propertyType: "",
+        requirement: ""
+      });
     }, 1500);
   };
 
@@ -87,277 +56,258 @@ function ContactPage() {
         path="/contact"
       />
 
-      <motion.section 
-        className="page-banner"
-        style={{ 
-          background: 'linear-gradient(135deg, var(--color-beige) 0%, var(--color-cream) 50%, var(--color-gold) 100%)',
-          position: 'relative',
-          overflow: 'hidden'
-        }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        <motion.div
-          style={{
-            position: 'absolute',
-            top: '10%',
-            left: '5%',
-            fontSize: '8rem',
-            opacity: 0.05,
-            color: 'var(--color-brown)'
-          }}
-          animate={floatAnimation}
-        >
-          <FaEnvelope />
-        </motion.div>
-        <motion.div
-          style={{
-            position: 'absolute',
-            bottom: '15%',
-            right: '8%',
-            fontSize: '6rem',
-            opacity: 0.05,
-            color: 'var(--color-brown)'
-          }}
-          animate={{ ...floatAnimation, transition: { ...floatAnimation.transition, delay: 1 } }}
-        >
-          <FaPhone />
-        </motion.div>
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            style={{ textAlign: 'center' }}
-          >
-            <h1>Contact Us</h1>
+      <div className="new-contact-page">
+        {/* Header Section */}
+        <section className="contact-header-section">
+          <div className="container">
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              Contact Us
+            </motion.h1>
             <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="lead-copy"
             >
               Reach us to book consultation, request maintenance services, or discuss infrastructure work.
             </motion.p>
-          </motion.div>
-        </div>
-      </motion.section>
+          </div>
+        </section>
 
-      <AnimatedSection className="content-section">
-        <div className="container contact-grid">
-          {/* Left Column: Contact Information */}
-          <motion.div 
-            className="contact-info-column"
-            variants={slideInFromLeft}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-          >
-            <h2>Get In</h2>
-            <h1>Touch With Us</h1>
-            <div className="contact-details">
-              <motion.div 
-                className="contact-detail-item"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                whileHover={{ x: 10, transition: { duration: 0.3 } }}
+        {/* Contact Bar (Phone & Email) */}
+        <section className="contact-bar-section">
+          <div className="container">
+            <div className="contact-bar-grid">
+              <motion.div
+                className="contact-bar-item left"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <motion.div 
-                  className="contact-detail-icon"
-                  animate={pulseAnimation}
-                >
-                  <FaMapMarkerAlt />
-                </motion.div>
-                <div className="contact-detail-text">
-                  <h3>Registered Office (Hyderabad)</h3>
-                  <p>
-                    <strong>DANDU INTERIORS AND DEVELOPERS</strong><br />
-                    {contactInfo.hyderabadAddress.join(", ")}
-                  </p>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                className="contact-detail-item"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                whileHover={{ x: 10, transition: { duration: 0.3 } }}
-              >
-                <motion.div 
-                  className="contact-detail-icon"
-                  animate={{ ...pulseAnimation, transition: { ...pulseAnimation.transition, delay: 0.5 } }}
-                >
-                  <FaMapMarkerAlt />
-                </motion.div>
-                <div className="contact-detail-text">
-                  <h3>Bapatla Address</h3>
-                  <p>{contactInfo.bapatlaAddress.join(", ")}</p>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                className="contact-detail-item"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                whileHover={{ x: 10, transition: { duration: 0.3 } }}
-              >
-                <motion.div 
-                  className="contact-detail-icon"
-                  animate={{ ...pulseAnimation, transition: { ...pulseAnimation.transition, delay: 1 } }}
-                >
-                  <FaPhone />
-                </motion.div>
-                <div className="contact-detail-text">
+                <div className="icon-box"><FaPhone /></div>
+                <div>
                   <h3>Call Us</h3>
                   <p>{contactInfo.phone}</p>
                 </div>
               </motion.div>
-
-              <motion.div 
-                className="contact-detail-item"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-                whileHover={{ x: 10, transition: { duration: 0.3 } }}
+              <motion.div
+                className="contact-bar-item right"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <motion.div 
-                  className="contact-detail-icon"
-                  animate={{ ...pulseAnimation, transition: { ...pulseAnimation.transition, delay: 1.5 } }}
-                >
-                  <FaEnvelope />
-                </motion.div>
-                <div className="contact-detail-text">
+                <div className="icon-box"><FaEnvelope /></div>
+                <div>
                   <h3>Send Us</h3>
                   <p>{contactInfo.email}</p>
                 </div>
               </motion.div>
             </div>
-          </motion.div>
+          </div>
+        </section>
 
-          {/* Right Column: Contact Form */}
-          <motion.div 
-            className="contact-form-column"
-            variants={slideInFromRight}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-          >
-            <h2>General</h2>
-            <h1>Inquiry</h1>
-            <form className="contact-form" onSubmit={handleSubmit}>
-              <motion.div 
-                className="form-group-row"
-                initial={{ opacity: 0, y: 20 }}
+        {/* Addresses and Maps Section */}
+        <section className="address-map-section">
+          <div className="container">
+            <motion.h2
+              className="section-title center-text"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              style={{ marginBottom: "4rem" }}
+            >
+              Our Locations
+            </motion.h2>
+
+            <div className="location-rows">
+              {/* Hyderabad Row */}
+              <motion.div
+                className="location-row"
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
               >
-                <motion.input
-                  type="text"
-                  name="name"
-                  placeholder="Full Name"
-                  className="form-input"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  whileFocus={{ scale: 1.02, transition: { duration: 0.2 } }}
-                />
-                <motion.input
-                  type="email"
-                  name="email"
-                  placeholder="Email Address"
-                  className="form-input"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  whileFocus={{ scale: 1.02, transition: { duration: 0.2 } }}
-                />
+                <div className="location-info">
+                  <div className="icon-box">
+                    <FaMapMarkerAlt />
+                  </div>
+                  <div className="location-text-content">
+                    <h3>Registered Office (Hyderabad)</h3>
+                    <p>DANDU INTERIORS AND DEVELOPERS, D-603, Vertex Pristine, Nizampet Road, Hyderabad</p>
+                  </div>
+                </div>
+                <div className="location-map">
+                  <div className="map-wrapper">
+                    <iframe
+                      title="Hyderabad Office Map"
+                      src={`https://maps.google.com/maps?q=${encodeURIComponent("Vertex Pristine, Nizampet Road, Hyderabad")}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+                      width="100%"
+                      height="250"
+                      style={{ border: 0, borderRadius: "12px" }}
+                      allowFullScreen
+                      loading="lazy"
+                    ></iframe>
+                  </div>
+                </div>
               </motion.div>
-              <motion.div 
-                className="form-group-row"
-                initial={{ opacity: 0, y: 20 }}
+
+              <div className="row-divider"></div>
+
+              {/* Bapatla Row */}
+              <motion.div
+                className="location-row"
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
               >
-                <motion.input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone Number"
-                  className="form-input"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                  whileFocus={{ scale: 1.02, transition: { duration: 0.2 } }}
-                />
-                <motion.input
-                  type="text"
-                  name="subject"
-                  placeholder="Subject"
-                  className="form-input"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  whileFocus={{ scale: 1.02, transition: { duration: 0.2 } }}
-                />
+                <div className="location-info">
+                  <div className="icon-box">
+                    <FaMapMarkerAlt />
+                  </div>
+                  <div className="location-text-content">
+                    <h3>Bapatla Address</h3>
+                    <p>Dr No: 9-4-12/B, Kamaraju Vari Street, Bapatla, Andhra Pradesh 522101</p>
+                  </div>
+                </div>
+                <div className="location-map">
+                  <div className="map-wrapper">
+                    <iframe
+                      title="Bapatla Office Map"
+                      src={`https://maps.google.com/maps?q=${encodeURIComponent("Kamaraju Vari Street, Bapatla, Andhra Pradesh 522101")}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+                      width="100%"
+                      height="250"
+                      style={{ border: 0, borderRadius: "12px" }}
+                      allowFullScreen
+                      loading="lazy"
+                    ></iframe>
+                  </div>
+                </div>
               </motion.div>
-              <motion.textarea
-                name="message"
-                placeholder="Your Message"
-                rows={5}
-                className="form-textarea"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                whileFocus={{ scale: 1.02, transition: { duration: 0.2 } }}
-              ></motion.textarea>
+            </div>
+          </div>
+        </section>
 
-              {status.submitted && (
-                <motion.div 
-                  className={`status-message ${status.error ? "error" : "success"}`} 
-                  style={{ color: status.error ? "red" : "green", fontWeight: 500 }}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4 }}
-                >
-                  {status.message}
-                </motion.div>
-              )}
+        {/* Contact Form Section */}
+        <section className="contact-form-section">
+          <div className="container">
+            <motion.div
+              className="form-container-centered"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="center-text" style={{ marginBottom: "3rem" }}>
+                <h2 style={{ marginBottom: "0.5rem" }}>Schedule a Free Design Consultation</h2>
+                <p className="form-subtext">
+                  Reach out to us immediately to arrange for a customised quotation from one of our assessors.
+                </p>
+              </div>
 
-              <motion.button 
-                type="submit" 
-                className="btn-submit" 
-                disabled={status.submitting}
-                whileHover={{ scale: 1.05, boxShadow: '0 15px 30px rgba(139, 107, 76, 0.3)' }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-              >
-                {status.submitting ? "Sending..." : (
-                  <>
-                    Send Message <FaPaperPlane />
-                  </>
+              <form className="contact-form" onSubmit={handleSubmit}>
+                <div className="form-group-row">
+                  <div className="form-field-wrap">
+                    <label>Name</label>
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Jane Smith"
+                      className="form-input"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="form-field-wrap">
+                    <label>Whatsapp mobile number</label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      placeholder="(123) 456-7890"
+                      className="form-input"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group-row">
+                  <div className="form-field-wrap">
+                    <label>where's your property located?</label>
+                    <select
+                      name="propertyLocation"
+                      className="form-input"
+                      value={formData.propertyLocation}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">Select…</option>
+                      <option value="Hyderabad">Hyderabad</option>
+                      <option value="Bapatla">Bapatla</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  <div className="form-field-wrap">
+                    <label>Type of property</label>
+                    <select
+                      name="propertyType"
+                      className="form-input"
+                      value={formData.propertyType}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">Select…</option>
+                      <option value="Villa">Villa</option>
+                      <option value="Apartment">Apartment</option>
+                      <option value="Commercial">Commercial</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="form-field-wrap" style={{ marginBottom: "2rem" }}>
+                  <label>Interior Design Requirement</label>
+                  <select
+                    name="requirement"
+                    className="form-input"
+                    value={formData.requirement}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="">Select…</option>
+                    <option value="Full Home Interior">Full Home Interior</option>
+                    <option value="Kitchen Only">Kitchen Only</option>
+                    <option value="Living Room Only">Living Room Only</option>
+                    <option value="Wardrobes / Storage">Wardrobes / Storage</option>
+                    <option value="Renovation">Renovation</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                {status.submitted && (
+                  <div className={`status-message ${status.error ? "error" : "success"}`} style={{ textAlign: "center", marginBottom: "2rem" }}>
+                    {status.message}
+                  </div>
                 )}
-              </motion.button>
-            </form>
-          </motion.div>
-        </div>
-      </AnimatedSection>
+
+                <div className="center-text">
+                  <button
+                    type="submit"
+                    className="btn-submit"
+                    disabled={status.submitting}
+                  >
+                    {status.submitting ? "Processing..." : "Get Free Consultation"}
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+        </section>
+      </div>
     </>
   );
 }
-
-export default ContactPage;

@@ -1,14 +1,19 @@
 import { motion } from "framer-motion";
-import { FaHammer, FaTools, FaPaintRoller, FaCheckDouble } from "react-icons/fa";
+import { FaTools } from "react-icons/fa";
 import AnimatedSection from "../components/animation/AnimatedSection";
 import PageSeo from "../components/seo/PageSeo";
 import { globalMetaDescription, seoKeywords } from "../content/siteContent";
 
-const maintenanceBlocks = [
+// Updated images for maintenance categories
+import CivilImg from "../assets/images/civil_maintenance.png";
+import PaintingImg from "../assets/images/painting_maintenance.png";
+import CarpentryImg from "../assets/images/carpentry_maintenance.png";
+import FooterPattern from "../assets/Designs/footer-1.png";
+
+const maintenanceData = [
   {
     title: "Civil Maintenance Works",
-    icon: <FaHammer />,
-    color: "#8b6b4c",
+    image: CivilImg,
     items: [
       "Floor tiles replacement",
       "Tiles Grouting works",
@@ -18,8 +23,7 @@ const maintenanceBlocks = [
   },
   {
     title: "Painting & Polishing Works",
-    icon: <FaPaintRoller />,
-    color: "#6d6d6d",
+    image: PaintingImg,
     items: [
       "Repainting walls",
       "Exterior painting",
@@ -29,8 +33,7 @@ const maintenanceBlocks = [
   },
   {
     title: "Carpentry Maintenance",
-    icon: <FaTools />,
-    color: "#c5a880",
+    image: CarpentryImg,
     items: [
       "Door’s alignment",
       "Locks replacement",
@@ -39,31 +42,6 @@ const maintenanceBlocks = [
     ],
   },
 ];
-
-const bounceIn = {
-  hidden: { scale: 0, opacity: 0 },
-  visible: { 
-    scale: 1, 
-    opacity: 1,
-    transition: { 
-      type: "spring" as const,
-      stiffness: 200,
-      damping: 15
-    }
-  }
-};
-
-const listItemVariants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: (i: number) => ({
-    opacity: 1,
-    x: 0,
-    transition: {
-      delay: i * 0.1,
-      duration: 0.4
-    }
-  })
-};
 
 function MaintenanceServicesPage() {
   return (
@@ -75,147 +53,90 @@ function MaintenanceServicesPage() {
         path="/maintenance-services"
       />
 
-      <motion.section 
+      <motion.section
         className="page-banner"
-        style={{ 
-          background: 'radial-gradient(circle at bottom left, var(--color-gold) 0%, var(--color-beige) 50%, var(--color-cream) 100%)',
-          position: 'relative',
-          overflow: 'hidden'
+        style={{
+          background: 'linear-gradient(135deg, var(--color-beige) 0%, var(--color-cream) 100%)',
+          minHeight: '40vh',
+          display: 'flex',
+          alignItems: 'center'
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <motion.div
-          style={{
-            position: 'absolute',
-            top: '20%',
-            right: '10%',
-            fontSize: '15rem',
-            opacity: 0.05,
-            color: 'var(--color-brown)'
-          }}
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        >
-          <FaTools />
-        </motion.div>
         <div className="container">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h1>Building Maintenance & Repair Works</h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
+            <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}>Building Maintenance & Repair Works</h1>
+            <p className="lead-copy">
               End-to-end maintenance support for civil, plumbing, electrical,
               carpentry, painting, and infrastructure works.
-            </motion.p>
+            </p>
           </motion.div>
         </div>
       </motion.section>
 
-      <AnimatedSection className="content-section">
-        <div className="container">
-          <motion.h2
-            initial={{ opacity: 0, y: -30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            style={{ textAlign: 'center', marginBottom: '3rem' }}
-          >
-            Maintenance Service Categories
-          </motion.h2>
-          <div className="cards-grid three-column" style={{ gap: '2.5rem' }}>
-            {maintenanceBlocks.map((block, blockIndex) => (
-              <motion.article 
-                key={block.title}
-                className="service-card"
-                variants={bounceIn}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ delay: blockIndex * 0.15 }}
-                whileHover={{ 
-                  y: -10,
-                  boxShadow: '0 20px 40px rgba(139, 107, 76, 0.2)',
-                  transition: { duration: 0.3 }
-                }}
-                style={{
-                  borderTop: `4px solid ${block.color}`,
-                  position: 'relative',
-                  overflow: 'hidden'
-                }}
+      <section className="maintenance-section">
+        <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '6rem', padding: '4rem 2rem' }}>
+          {maintenanceData.map((service, index) => (
+            <div key={service.title}>
+              <AnimatedSection
+                className={`maintenance-item-wrapper ${index === 1 ? 'reverse' : ''}`}
               >
-                <motion.div
-                  style={{
-                    position: 'absolute',
-                    top: '-20px',
-                    right: '-20px',
-                    fontSize: '6rem',
-                    opacity: 0.05,
-                    color: block.color
-                  }}
-                  animate={{ rotate: [0, 10, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  {block.icon}
-                </motion.div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-                  <motion.div
-                    style={{
-                      fontSize: '2.5rem',
-                      color: block.color,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}
-                    whileHover={{ scale: 1.2, rotate: 15 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {block.icon}
-                  </motion.div>
-                  <h3 style={{ margin: 0, flex: 1 }}>{block.title}</h3>
-                </div>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                  {block.items.map((item, itemIndex) => (
-                    <motion.li 
-                      key={item}
-                      custom={itemIndex}
-                      variants={listItemVariants}
-                      initial="hidden"
-                      whileInView="visible"
+                <div className="maintenance-card-bg">
+                  <div className="maintenance-card-number-shell" aria-hidden="true">
+                    <span className="maintenance-card-number">{String(index + 1).padStart(2, "0")}</span>
+                  </div>
+                  <div className="maintenance-content-column">
+                    <motion.h3
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.75rem',
-                        padding: '0.5rem 0',
-                        borderBottom: itemIndex < block.items.length - 1 ? '1px solid rgba(109, 109, 109, 0.1)' : 'none'
-                      }}
+                      transition={{ delay: 0.2 }}
                     >
-                      <FaCheckDouble style={{ color: block.color, fontSize: '0.9rem', flexShrink: 0 }} />
-                      <span>{item}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.article>
-            ))}
-          </div>
+                      {service.title}
+                    </motion.h3>
+                    <ul className="maintenance-item-list">
+                      {service.items.map((item, i) => (
+                        <motion.li
+                          key={i}
+                          initial={{ opacity: 0, x: 20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.3 + (i * 0.1) }}
+                        >
+                          <div className="maintenance-indicator"></div>
+                          {item}
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                <motion.div
+                  className="burst-image-wrapper"
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                >
+                  <img src={service.image} alt={service.title} />
+                </motion.div>
+              </AnimatedSection>
+              {index < maintenanceData.length - 1 ? (
+                <div className={`maintenance-divider ${index === 0 ? 'reverse' : ''}`} aria-hidden="true">
+                  <img src={FooterPattern} alt="" />
+                </div>
+              ) : null}
+            </div>
+          ))}
         </div>
-      </AnimatedSection>
+      </section>
 
-      <motion.section 
-        className="content-section muted-bg"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
+      <AnimatedSection className="content-section muted-bg">
         <div className="container narrow" style={{ textAlign: 'center' }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -223,14 +144,17 @@ function MaintenanceServicesPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
+            <div style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'center' }}>
+              <FaTools style={{ fontSize: '3rem', color: 'var(--color-brown)' }} />
+            </div>
             <h2>One-Time Service & AMC Available</h2>
-            <p style={{ fontSize: '1.1rem', lineHeight: '1.8', color: 'var(--color-gray)' }}>
-              Whether you need a quick fix or ongoing maintenance support, we offer flexible service options 
+            <p style={{ fontSize: '1.25rem', lineHeight: '1.8', color: 'var(--color-gray)' }}>
+              Whether you need a quick fix or ongoing maintenance support, we offer flexible service options
               including one-time repairs and Annual Maintenance Contracts (AMC) tailored to your needs.
             </p>
           </motion.div>
         </div>
-      </motion.section>
+      </AnimatedSection>
     </>
   );
 }
