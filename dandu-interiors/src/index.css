@@ -79,7 +79,7 @@ a {
   width: 100%;
   z-index: 1000;
   background: transparent;
-  padding: 2.5rem 0 1.5rem;
+  padding: 1.5rem 0;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -87,52 +87,43 @@ a {
   position: fixed;
   background: rgba(245, 242, 237, 0.98);
   backdrop-filter: blur(12px);
-  padding: 1rem 0;
+  padding: 0.75rem 0;
   box-shadow: 0 4px 20px rgba(47, 47, 47, 0.08);
   border-bottom: 1px solid rgba(139, 107, 76, 0.1);
 }
 
-.nav-wrap-vertical {
+.nav-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  justify-content: space-between;
+  gap: 2rem;
 }
 
-.brand-row {
+.nav-menu {
+  flex: 1;
   display: flex;
   justify-content: center;
-  width: 100%;
-}
-
-.nav-row {
-  display: flex;
-  justify-content: center !important;
-  width: 100%;
   gap: 1.5rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
-.social-links-top {
-  position: absolute;
-  top: 1.5rem;
-  right: 2rem;
+.social-links-row {
   display: flex;
   gap: 1.25rem;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
-.social-links-top a {
+.social-links-row a {
   color: var(--color-charcoal);
   transition: all 0.3s ease;
   opacity: 0.8;
 }
 
-.social-links-top a:hover {
-  color: var(--color-charcoal);
+.social-links-row a:hover {
   opacity: 1;
   transform: translateY(-2px);
 }
+
 
 
 .brand-mark {
@@ -264,6 +255,111 @@ a {
 .active-link {
   color: #fff;
   background: var(--color-charcoal);
+}
+
+/* Dropdown Menu Styles */
+.nav-item-container {
+  position: relative;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dropdown-arrow {
+  font-size: 0.7rem;
+  transition: transform 0.3s ease;
+}
+
+.nav-item-container:hover .dropdown-arrow,
+.nav-item-container.dropdown-open .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--color-cream);
+  min-width: 220px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(47, 47, 47, 0.12);
+  padding: 0.75rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(139, 107, 76, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  z-index: 1000;
+}
+
+.nav-item-container:hover .dropdown-menu,
+.nav-item-container.dropdown-open .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(5px);
+}
+
+.dropdown-link {
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  color: var(--color-charcoal);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.dropdown-link:hover {
+  background: rgba(139, 107, 76, 0.1);
+  color: var(--color-brown);
+}
+
+/* Mobile Submenu Styles */
+.mobile-nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mobile-nav-link {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.mobile-dropdown-arrow {
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+.mobile-dropdown-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+.mobile-submenu {
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+  border-left: 1px solid rgba(139, 107, 76, 0.1);
+}
+
+.mobile-sub-link {
+  font-size: 1.1rem;
+  color: var(--color-gray);
+  padding: 0.25rem 0;
+  transition: color 0.2s ease;
+}
+
+.mobile-sub-link:hover {
+  color: var(--color-charcoal);
 }
 
 .hero-section,
@@ -547,35 +643,22 @@ ul {
     border-left: none;
     border-right: none;
     background: rgba(245, 242, 237, 0.98);
+    padding: 0.75rem 0;
   }
 
-  .site-header.scrolled {
-    top: 0;
-    border-radius: 0;
-  }
-
-  .nav-wrap {
-    padding: 0.75rem 1rem;
-  }
-
-  .split-nav-wrap {
-    display: flex;
+  .nav-container {
+    padding: 0 1.5rem;
     justify-content: space-between;
-    align-items: center;
   }
 
-  .nav-menu {
+  .nav-menu, 
+  .social-links-row {
     display: none;
   }
 
   .mobile-toggle {
     display: block;
-  }
-
-  .centered-brand {
-    align-items: center;
-    text-align: center;
-    flex-grow: 1;
+    order: 2;
   }
 
   .brand-logo {

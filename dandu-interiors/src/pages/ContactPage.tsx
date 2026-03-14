@@ -59,14 +59,19 @@ export default function ContactPage() {
       <div className="new-contact-page">
         {/* Header Section */}
         <section className="contact-header-section">
+
           <div className="container">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              style={{ marginBottom: '1rem' }}
             >
-              Contact Us
-            </motion.h1>
+              <h2 style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', lineHeight: '1', fontWeight: 800, margin: 0 }}>
+                CONTACT <br />
+                <span className="text-gradient">US.</span>
+              </h2>
+            </motion.div>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -76,6 +81,8 @@ export default function ContactPage() {
               Reach us to book consultation, request maintenance services, or discuss infrastructure work.
             </motion.p>
           </div>
+
+
         </section>
 
         {/* Contact Bar (Phone & Email) */}
